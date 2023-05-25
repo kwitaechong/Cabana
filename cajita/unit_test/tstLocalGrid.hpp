@@ -28,13 +28,13 @@ namespace Test
 {
 
 //---------------------------------------------------------------------------//
-template <class BoundaryType, class OwnedType, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int NSD>
 void checkBoundary( BoundaryType boundary_space, OwnedType owned_space,
                     const std::array<int, NSD> neighbor,
                     const int min_lower_shift, const int min_upper_shift,
                     const int max_lower_shift, const int max_upper_shift )
 {
-    for ( std::size_t d = 0; d < NSD; ++d )
+    for ( int d = 0; d < NSD; ++d )
         if ( neighbor[d] == -1 )
         {
             EXPECT_EQ( boundary_space.min( d ),
@@ -57,14 +57,14 @@ void checkBoundary( BoundaryType boundary_space, OwnedType owned_space,
 }
 
 //---------------------------------------------------------------------------//
-template <class BoundaryType, class OwnedType, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int NSD>
 void checkFaceBoundary( BoundaryType boundary_space, OwnedType owned_space,
                         const std::array<int, NSD> neighbor,
                         const int min_lower_shift, const int min_upper_shift,
                         const int max_lower_shift, const int max_upper_shift,
                         const int Dir )
 {
-    for ( std::size_t d = 0; d < NSD; ++d )
+    for ( int d = 0; d < NSD; ++d )
     {
         int min_upper_shift_dir = 0;
         int max_lower_shift_dir = 0;
@@ -99,14 +99,14 @@ void checkFaceBoundary( BoundaryType boundary_space, OwnedType owned_space,
 }
 
 //---------------------------------------------------------------------------//
-template <class BoundaryType, class OwnedType, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int NSD>
 void checkEdgeBoundary( BoundaryType boundary_space, OwnedType owned_space,
                         const std::array<int, NSD> neighbor,
                         const int min_lower_shift, const int min_upper_shift,
                         const int max_lower_shift, const int max_upper_shift,
                         const int Dir )
 {
-    for ( std::size_t d = 0; d < NSD; ++d )
+    for ( int d = 0; d < NSD; ++d )
     {
         int min_upper_shift_dir = 0;
         int max_lower_shift_dir = 0;
@@ -139,8 +139,7 @@ void checkEdgeBoundary( BoundaryType boundary_space, OwnedType owned_space,
         }
     }
 }
-template <class EntityType, class BoundaryType, class OwnedType,
-          std::size_t NSD>
+template <class EntityType, class BoundaryType, class OwnedType, int NSD>
 void checkBoundary( Ghost, EntityType, BoundaryType boundary_space,
                     OwnedType owned_space, const std::array<int, NSD> neighbor,
                     const int halo_width )
@@ -150,7 +149,7 @@ void checkBoundary( Ghost, EntityType, BoundaryType boundary_space,
                    halo_width );
 }
 
-template <class BoundaryType, class OwnedType, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int NSD>
 void checkBoundary( Own, Cell, BoundaryType boundary_space,
                     OwnedType owned_space, const std::array<int, NSD> neighbor,
                     const int halo_width )
@@ -159,7 +158,7 @@ void checkBoundary( Own, Cell, BoundaryType boundary_space,
                    halo_width, 0 );
 }
 
-template <class BoundaryType, class OwnedType, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int NSD>
 void checkBoundary( Own, Node, BoundaryType boundary_space,
                     OwnedType owned_space, const std::array<int, NSD> neighbor,
                     const int halo_width )
@@ -168,7 +167,7 @@ void checkBoundary( Own, Node, BoundaryType boundary_space,
                    halo_width + 1, 0 );
 }
 
-template <class BoundaryType, class OwnedType, int Dir, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int Dir, int NSD>
 void checkBoundary( Own, Face<Dir>, BoundaryType boundary_space,
                     OwnedType owned_space, const std::array<int, NSD> neighbor,
                     const int halo_width )
@@ -177,7 +176,7 @@ void checkBoundary( Own, Face<Dir>, BoundaryType boundary_space,
                        halo_width, 0, Dir );
 }
 
-template <class BoundaryType, class OwnedType, int Dir, std::size_t NSD>
+template <class BoundaryType, class OwnedType, int Dir, int NSD>
 void checkBoundary( Own, Edge<Dir>, BoundaryType boundary_space,
                     OwnedType owned_space, const std::array<int, NSD> neighbor,
                     const int halo_width )
@@ -186,8 +185,7 @@ void checkBoundary( Own, Edge<Dir>, BoundaryType boundary_space,
                        halo_width, 0, Dir );
 }
 
-template <class EntityType, class LocalGridType, class OwnedType,
-          std::size_t NSD>
+template <class EntityType, class LocalGridType, class OwnedType, int NSD>
 void checkRepresentativeOwnBoundaries(
     EntityType, LocalGridType local_grid, OwnedType owned_space,
     std::vector<std::array<int, NSD>> neighbors, const int halo_width,
@@ -215,8 +213,7 @@ void checkRepresentativeOwnBoundaries(
     }
 }
 
-template <class EntityType, class LocalGridType, class OwnedType,
-          std::size_t NSD>
+template <class EntityType, class LocalGridType, class OwnedType, int NSD>
 void checkRepresentativeGhostBoundaries(
     EntityType, LocalGridType local_grid, OwnedType owned_space,
     std::vector<std::array<int, NSD>> neighbors, const int halo_width,
@@ -244,8 +241,7 @@ void checkRepresentativeGhostBoundaries(
     }
 }
 
-template <class EntityType, class LocalGridType, class OwnedType,
-          std::size_t NSD>
+template <class EntityType, class LocalGridType, class OwnedType, int NSD>
 void checkRepresentativeBoundaries( EntityType entity, LocalGridType local_grid,
                                     OwnedType owned_space,
                                     std::vector<std::array<int, NSD>> neighbors,
